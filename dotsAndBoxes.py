@@ -17,13 +17,17 @@ def play_game():
 	Board.print_board()
 	if Board.end_game():
 		print(Board.current_player.initial+" Kazandi !")
+		print("Oyuncu "+ PlayerA.initial + "’e ait karelerin sayısı: " + str(playerA_score))
+		print("Oyuncu "+ PlayerB.initial + "’e ait karelerin sayısı: " + str(playerB_score))
+
+
 		if playerA_score > playerB_score:
 			PlayerA.num_wins += 1
 		else:
 			PlayerB.num_wins += 1
 		return
 	elif Board.tie():
-		print("Berabere ovv yee!")
+		print("Oyunu berabere.")
 		return
 	enter_coordinates()
 	if Board.current_player == PlayerA:
@@ -37,11 +41,13 @@ def play_game():
 	play_game()
 
 def valid_coordinate(coordinate):
-	return (len(coordinate) == 2 and 
-		   coordinate[0] in ["A","B","C","D","E","F","G","H","i","J","K","L","M","N","O","P","Q","R","S","T"][:Board.width+1] and
-		   coordinate[1] in ["0","1","2","3","4","5","6","7","8"][:Board.height+1])
+	return (len(coordinate) == 3 and
+			coordinate[0] in ["A","B","C","D","E","F","G","H","i","J","K","L","M","N","O","P","Q","R","S"][:Board.width] and
+			coordinate[1] in ["0","1","2","3","4","5","6","7","8"][:Board.height] and
+			coordinate[2] in ["D","B","K","G"][:Board.height])
 
-def sik(coor):
+
+def convert(coor):
 	letter_dict = {"A":0, "B":1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H": 7, "i": 8, "J": 9, "K": 10, "L": 11, "M": 12, "N": 13, "O": 14, "P": 15, "Q": 16, "R": 17, "S": 18, "T":19}
 	reverse_dict = dict((reversed(item) for item in letter_dict.items()))
 
@@ -93,55 +99,55 @@ def enter_coordinates():
 	# 	return
 
 	#print("Draw a line between adjacent dots by entering the dot coordinates")
-	core = raw_input("Oyuncu "+Board.current_player.initial+" lütfen tercihinizi giriniz: "  )
-	coordinates = sik(core)
-	print(coordinates)
+	core = (raw_input("Oyuncu "+Board.current_player.initial+" lütfen tercihinizi giriniz: "  )).upper()
+	#coordinates = convert(core)
+	#print(coordinates)
 	# if coordinates.upper() == "Q" or coordinates.upper() == "QUiT":
 	# 	print("Goodbye!")
 	# 	quit()
 	letter_dict = {"A":0, "B":1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H": 7, "i": 8, "J": 9, "K": 10, "L": 11, "M": 12, "N": 13, "O": 14, "P": 15, "Q": 16, "R": 17, "S": 18, "T":19}
 	number_dict = {"1":0,"2":1,"3":2,"4":3,"5":4,"6":5,"7":6,"8":7}
-	if len(coordinates) == 4:
-		if valid_coordinate(coordinates[:2]):
-			first = list(coordinates[:2])
-			first[0] = letter_dict[first[0]]
-			first[1] = number_dict[first[1]]
-			if valid_coordinate(coordinates[2:]):
-				second = list(coordinates[2:])
-				second[0] = str(letter_dict[second[0]])
-				second[1] = number_dict[second[1]]
 
-				if not Board.set_line(first,second):
-					print("Aynı yeri girmeyin lütfen !!")
-					enter_coordinates()
-			else:
-				print("Lutfen gecerli bir adres giriniz !!")
-				enter_coordinates()
-		else:
-			print("Lutfen gecerli bir adres giriniz !!")
-			enter_coordinates()
+	if valid_coordinate(core):
+		coordinates = convert(core)
+		print(coordinates)
+		first = list(coordinates[:2])
+		first[0] = letter_dict[first[0]]
+		first[1] = number_dict[first[1]]
+		if valid_coordinate(core):
+			second = list(coordinates[2:])
+			second[0] = str(letter_dict[second[0]])
+			second[1] = number_dict[second[1]]
 
-	elif len(coordinates) == 5:
-		split = coordinates.split()
-		if not coordinates[2] == " ":
-			print("Lutfen gecerli bir adres giriniz !!")
-			enter_coordinates()
-		elif valid_coordinate(split[0]):
-			first = split[0]
-			if valid_coordinate(split[1]):
-				second = split[1]
-				if not Board.set_line(first,second):
-					print("Lutfen koordinatlarin bitisik girin !!")
-					enter_coordinates()
-			else:
-				print("Lutfen gecerli bir adres giriniz !!")
+			if not Board.set_line(first,second):
+				print("Aynı yeri girmeyin lütfen !!")
 				enter_coordinates()
 		else:
 			print("Lutfen gecerli bir adres giriniz !!")
 			enter_coordinates()
 	else:
-		print("Lutfen gecerli bir adres giriniz !!")
+		print("Lutfen gecerli bir adres girinizfads !!")
 		enter_coordinates()
+
+	# elif len(coordinates) == 5:
+	# 	split = coordinates.split()
+	# 	if not coordinates[2] == " ":
+	# 		print("Lutfen gecerli bir adres giriniz !!")
+	# 		enter_coordinates()
+	# 	elif valid_coordinate(split[0]):
+	# 		first = split[0]
+	# 		if valid_coordinate(split[1]):
+	# 			second = split[1]
+	# 			if not Board.set_line(first,second):
+	# 				print("Lutfen koordinatlarin bitisik girin !!")
+	# 				enter_coordinates()
+	# 		else:
+	# 			print("Lutfen gecerli bir adres giriniz !!")
+	# 			enter_coordinates()
+	# 	else:
+	# 		print("Lutfen gecerli bir adres giriniz !!")
+	# 		enter_coordinates()
+
 
 	
 

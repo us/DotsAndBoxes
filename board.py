@@ -362,7 +362,7 @@ class Board:
 			self.set_height(height)
 
 	def end_game(self):
-		return self.current_player.score > self.width*self.height/2.0
+		return self.current_player.score > (self.width)*(self.height-1)/2.0
 
 	def tie(self):
 		return (self.current_player.score == self.other_player.score and
@@ -394,5 +394,31 @@ class Board:
 			
 			print
 		print
-
-
+# a1b
+# a2b
+# a3b
+# a1d
+# b2d
+# b3d
+# b1g
+# a2g
+# a3g
+# a1k
+# a3d
+# a1g
+# c1d
+# b2g
+# c1k
+# a2d
+# c2d
+# a2k
+# b3g
+# c3d
+# c1g
+# a3k
+# b1d
+# c3g
+# b1k
+# b2k
+# b3k
+# c2g
