@@ -17,7 +17,7 @@ class Board:
 
 	other_player = 0
 
-	horiz_nums = ["    A","   B","   C","   D","   E","   F","   G","   H","   i","   J","   K","   L","   M","   N","   O","   P","   Q","   R","   S","   T"]
+	horiz_nums = ["     A","   B","   C","   D","   E","   F","   G","   H","   i","   J","   K","   L","   M","   N","   O","   P","   Q","   R","   S","   T"]
 
 	depth = 0
 
@@ -96,132 +96,6 @@ class Board:
 					return False
 			return True
 		return False
-
-	# def alphabeta_search(self,isPlayerA,playerAscore,playerBscore):
-	# 	moves = self.generate_moves(self.lines_drawn)
-	# 	best_move = moves[0]
-	# 	best_score = -1000
-	# 	self.depth = self.current_player.search_depth
-	# 	for move in moves:
-	# 		if self.depth == 0:
-	# 			return move
-	# 		self.moves_searched += 1
-	# 		clone = self.next_state(move[:2],move[2:], self.lines_drawn, isPlayerA,playerAscore, playerBscore)
-	# 		score = 0
-	# 		if (not clone[1] - playerAscore == 0) or (not clone[2] - playerBscore == 0): #score change therefore continue to play max
-	# 			#print("player not changed, keeping max alphabeta")
-	# 			score = self.max_play(clone,playerAscore,playerBscore, isPlayerA, self.depth-1)
-	# 		else:
-	# 			score = self.min_play(clone,playerAscore,playerBscore, isPlayerA, self.depth-1, max_best_score = best_score)
-	# 		if score > best_score:
-	# 			best_move = move
-	# 			best_score = score
-	# 	return best_move
-
-	# def min_play(self, state, old_scoreA, old_scoreB, originalPlayerA, depth, max_best_score = None):
-	# 	end = (state[1] > self.width*self.height/2.0 or state[2] > self.width*self.height/2.0 or
-	# 		  		(state[1] == state[2] and state[1]+ state[2] == self.width*self.height))
-	# 	if end:
-	# 		if originalPlayerA:
-	# 			if state[1] > state[2]:
-	# 				#print("score A > score B")
-	# 				return 100
-	# 			elif state[2] > state[1]:
-	# 				#print("score B > score A")
-	# 				return -100
-	# 			else:
-	# 				#print("Tie")
-	# 				return 0
-	# 		else:
-	# 			if state[2] > state[1]:
-	# 				#print("score B > score A")
-	# 				return 100
-	# 			elif state[1] > state[2]:
-	# 				#print("score A > score B")
-	# 				return -100
-	# 			else:
-	# 				#print("Tie")
-	# 				return 0
-	# 	elif depth == 0:
-	# 		if originalPlayerA:
-	# 			return state[1] - state[2]
-	# 		else:
-	# 			return state[2] - state[1]
-	# 	moves = self.generate_moves(state[0])
-	# 	best_score = 1000
-	# 	for move in moves:
-	# 		self.moves_searched += 1
-	# 		isPlayerA = not state[3] #default swap players
-	# 		if (not state[1] - old_scoreA == 0) or (not state[2] - old_scoreB == 0): #if a score changed keep same player
-	# 			isPlayerA = state[3]
-	# 		clone = self.next_state(move[:2],move[2:],state[0],isPlayerA,state[1],state[2])
-	# 		score = 0
-	# 		if (not clone[1] - state[1] == 0) or (not clone[2] - state[2] == 0): #kept the same player therefore keep playing min
-	# 			score = self.min_play(clone, state[1], state[2], originalPlayerA, depth-1)
-	# 			#print("player not changed, keeping min minplay")
-	# 		else:
-	# 			score = self.max_play(clone, state[1], state[2], originalPlayerA,depth-1,min_best_score = best_score)
-	# 		#print("search score for this move is "+str(score))
-	# 		if score < best_score:
-	# 			best_score = score
-	# 			if not max_best_score is None:
-  	# 				if best_score <= max_best_score:
-  	# 					#print("pruned")
-  	# 					return best_score
-    #
-  	# 	return best_score
-
-  	# def max_play(self,state,old_scoreA, old_scoreB, originalPlayerA, depth, min_best_score = None):
-		# end = (state[1] > self.width*self.height/2.0 or state[2] > self.width*self.height/2.0 or
-		# 	  		(state[1] == state[2] and state[1]+ state[2] == self.width*self.height))
-		# if end:
-		# 	if originalPlayerA:
-		# 		if state[1] > state[2]:
-		# 			#print("score A > score B")
-		# 			return 100
-		# 		elif state[2] > state[1]:
-		# 			#print("score B > score A")
-		# 			return -100
-		# 		else:
-		# 			#print("Tie")
-		# 			return 0
-		# 	else:
-		# 		if state[2] > state[1]:
-		# 			#print("score B > score A")
-		# 			return 100
-		# 		elif state[1] > state[2]:
-		# 			#print("score A > score B")
-		# 			return -100
-		# 		else:
-		# 			#print("Tie")
-		# 			return 0
-		# elif depth == 0:
-		# 	if originalPlayerA:
-		# 		return state[1] - state[2]
-		# 	else:
-		# 		return state[2] - state[1]
-		# moves = self.generate_moves(state[0])
-		# best_score = -1000
-		# for move in moves:
-		# 	self.moves_searched += 1
-		# 	#print(move)
-		# 	isPlayerA = not state[3] #default swap players
-		# 	if (not state[1] - old_scoreA == 0) or (not state[2] - old_scoreB == 0): #if a score changed keep same player
-		# 		isPlayerA = state[3]
-		# 	clone = self.next_state(move[:2],move[2:],state[0],isPlayerA,state[1],state[2])
-		# 	score = 0
-		# 	if (not clone[1] - state[1] == 0) or (not clone[2] - state[2] == 0): #kept the same player therefore keep playing max
-		# 		score = self.max_play(clone, state[1], state[2], originalPlayerA,depth-1)
-		# 		#print("player not changed, keeping max maxplay")
-		# 	else:
-		# 		score = self.min_play(clone, state[1], state[2], originalPlayerA,depth-1,max_best_score = best_score)
-		# 	if score > best_score:
-		# 		best_score = score
-		# 		if not min_best_score is None:
-		# 			if best_score >= min_best_score:
-		# 				#print("pruned")
-		# 				return best_score
-  	# 	return best_score
 
 	def next_state(self,start,end,lines_drawn,isPlayerA,playerAscore, playerBscore):
 		horiz = abs(int(start[0]) - int(end[0]))
@@ -309,36 +183,15 @@ class Board:
 
 
 	def board_width(self):
-		width = raw_input("Oyun alaninin sutun sayisini giriniz (3-19): ")
-		# if width.upper() == "Q" or width.upper() == "QUiT":
-		# 	print("Goodbye!")
-		# 	quit()
+		width = raw_input("Please enter a board width between 1 and 19 : ")
+
 		if width in ["3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19"]:
 			return int(width)
 		return self.board_width()
 
 
-	# def generate_moves(self, lines_drawn):
-	# 	moves = []
-	# 	for x in range(self.width):
-	# 		for y in range(self.height+1):
-	# 			if not lines_drawn[2*y][x]:
-	# 				moves.append(str(x)+str(y)+str(x+1)+str(y))
-    #
-	# 	for y in range(self.height):
-	# 		for x in range(self.width+1):
-	# 			if not lines_drawn[2*y+1][x]:
-	# 				moves.append(str(x)+str(y)+str(x)+str(y+1))
-	# 	shuffle(moves)
-	# 	return moves
-
-
-
-
-
-
 	def board_height(self):
-		height = raw_input("Oyun alaninin satir sayisini giriniz (3-7): ")
+		height = raw_input("Please enter a board height between 1 and 9 : ")
 		if height.upper() == "Q" or height.upper() == "QUiT":
 			print("Goodbye!")
 			quit()
